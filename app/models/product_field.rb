@@ -1,0 +1,3 @@
+class ProductField < ApplicationRecord
+    
+end
