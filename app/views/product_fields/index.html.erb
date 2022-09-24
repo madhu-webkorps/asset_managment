@@ -1,36 +1,61 @@
 <div class="container mt-5">
  <div class="row">
-    <div class="col-md-6">
-    <% if user_signed_in? %>
-    <h5>Username :  <%=current_user.email%></h5>
-    <h5>User Id :  <%=current_user.id%></h5>
-    
-    <%end%>
-    <br>
-    <%= link_to 'Add Product field' , new_product_field_path , class: "btn btn-primary "%><br>
-    <table class="table">
-     <thead>
-       <tr>
-          <th>Field_Name</th>
-          <th>Field_Type</th>
-       <tr>
-     </thead>
-     <tbody>
-        <%@product_field.each do |product|%>
-          <tr>
-            <td><%= product.field_name%></td>
-            <td><%= product.field_type%></td>
-            <td> <%= link_to 'Add Product' , new_product_path , class: "btn btn-primary "%></td>
-   
-          </tr>
-        <%end%>
-      </tbody>
+   <div class="col-md-6">
+      <% if user_signed_in? %>
+        <h5>Username :  <%=current_user.email%></h5>
+        <h5>User Id :  <%=current_user.id%></h5>
+        <div class= "d-inline-block">
+          <%= link_to 'Add product field' , new_product_field_path , class: "btn btn-outline-primary m-2"%>
+          <%= link_to 'Add Product' , new_product_path(@product_field) , class: "btn btn-outline-primary m-2" %>
+          <%= link_to "Log Out", destroy_user_session_path , method: :delete, class: "btn btn-outline-danger m-2"%>
+          <%= link_to "All product", allproduct_path , class: "btn btn-outline-success m-2", data: {remote: true} %>
 
-    </table>
+        </div>
+        <% if @product_fields.count > 0%>
+        <table class="table">
+        <thead>
+          <tr>
+              <th>Field_Name</th>
+              <th>Field_Type</th>
+              <th>Delete</th>
+          <tr>
+        </thead>
+        <tbody>
+            <%@product_fields.each do |product|%>
+              <tr>
+                <td><%= product.field_name%></td>
+                <td><%= product.field_type%></td>
+                <td>
+                 <%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' },class: "btn btn-outline-danger" %>
+                </td>
+
+              </tr>
+            <%end%>
+          </tbody>
+
+        </table>
+
+        <%else%>
+        <br><br>
+        <p class="text-danger">Frist add product fields</p>
+        <%end%>
+      <% else %>
+        <%= link_to "Sign Up", new_user_registration_path, class: " w3-padding-large w3-hover-red w3-hide-small w3-right w3-button w3-blue", style: "margin-top:12px; margin-right:15px;"%>
+      <%end%>
+
+
+      <div id = "allproducts">
+        all products
+      </div>
+    </div>
   </div>
 </div>
-</div>
 
+<script>
+function allproduct(){
+
+}
+</script>
 
 
 

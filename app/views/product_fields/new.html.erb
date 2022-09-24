@@ -1,23 +1,24 @@
-<h1>ProdutFields#new</h1>
-<p>Find me in app/views/produt_fields/new.html.erb</p>
-
-<%= form_with(model: @product ) do |form| %>
+<<div class = "container mt-5">
+  <div class = "row">
+    <div class = " col-md-6">
+      <div class = "p-1">
+       <h1>Add product form</h1>
+  <br>
+     <%= form_with(model:  @product_field ) do |form| %>
         <div class="form-group ">
-        <%= form.label :field_name, class: "form-label" %>
-          <%= form.text_field :field_name, class:"form-control"%>
+        <%= form.label :field_name, class: "form-label"  %>
+          <%= form.text_field :field_name, class:"form-control" ,placeholder: "Enter your field name"%>
         </div><br>
 
         <div class="form-group">
           <%= form.label :field_type, class: "form-label" %>
-          <%= form.text_field :field_type, class:"form-control"%>
+          <%= form.select :field_type,['integer' , 'boolean', 'float', 'bigint' , 'text' , 'string'], class:"form-control btn btn-outline-primary"%>
         </div><br>
 
-        <%# <div class="form-group">
-          <%= form.hidden_field :user_id, class:"form-control"%>
-        <%# </div><br> %> 
-
         <div class="actions">
-            <%= form.submit "Add product fields" %>
+            <%= form.submit "Add product fields" , class: "btn btn-primary"%>
         </div>
-
-<%end%>
+     <%end%>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,48 @@
+<div class = "container mt-5">
+  <div class = "row">
+    <div class = " col-md-6">
+    <table class="table">
+      <h1>All products</h1>
+      <hr>
+      <% total = @products.count%> 
+      <% if (total > 1)%>
+        <p>You have <%= total%> products</p>
+        <%elsif(total == 1) %>
+        <p> you have one product</p>
+        <%else%>
+        <p>you have no product right now</p>
+         <p>please go to add product link</p>
+          <%= link_to 'Add Product' , new_product_path(@product_field) , class: "btn btn-outline-primary m-2" %>
+          
+        <%end%>
+
+      
+      <thead>
+      <% @products.each do |product| %>
+        <tr>
+        <% product.attributes.first do |attributes| %>
+          <% next if attributes[0]  == "_id"%>
+          <th><%= attributes[0] %></th>
+           <% end %>
+           <th>Action</th>
+        <tr>
+          <% end %>
+      </thead>
+      <tbody>
+          <% @products.each do |product| %>
+            <tr>
+              <% product.attributes.each do |attributes| %>
+                <% next if attributes[0]  == "_id"%>
+                <td><%= attributes[1] %></td>
+                
+              <% end %>
+              <td>
+                <%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' },class: "btn btn-outline-danger" %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
