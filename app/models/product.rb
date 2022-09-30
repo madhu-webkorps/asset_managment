@@ -4,6 +4,4 @@ class Product
 
   belongs_to :user
   
-  field :user, type: Integer
-  
 end

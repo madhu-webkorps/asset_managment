@@ -1,8 +1,8 @@
 <div class = "container mt-5">
-<h1>Add product form</h1>
-<form action="/products " method = "post">
-<%= csrf_meta_tags %>
-<% @product.each do |product|%>
+	<h1>Add product form</h1>
+	<form action="/products " method = "post">
+	<%= csrf_meta_tags %>
+	<% @product.each do |product|%>
   <label for= <%= product.field_name %> > <%=product.field_name%> </label><br>
   <input type= <%= product.field_type %> id="fname" name= <%= product.field_name %> ><br>
   <%end%>

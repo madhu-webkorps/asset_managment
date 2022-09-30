@@ -2,6 +2,8 @@ class ProductsController < ApplicationController
 @@user = 0
   def new 
     @product = ProductField.all.where(user_id: current_user.id)
+    @user_id = ProductField.pluck(:user_id)[0]
+    
     # @product = Product.new
   end
 
@@ -10,6 +12,7 @@ class ProductsController < ApplicationController
   # end
 
   def create
+
     hash = Hash.new
     params.each do |key , value |
       @@user = params[:authenticity_token]
@@ -19,11 +22,14 @@ class ProductsController < ApplicationController
        hash.store(key,value)
       end
     end
-    debugger
+    
     product_params = hash
-    @product = Product.new(product_params)
-
+    product_params
+    debugger
+    @product = Product.create(product_params)
+    @product.user_id = current_user.id
     respond_to do |format|
+    
       if @product.save!
         format.html { redirect_to root_url , notice: "product was successfully created." }
         format.json { render :show, status: :created, location: @product }
@@ -50,6 +56,10 @@ def destroy
     format.html { redirect_to root_url, notice: "Product was successfully destroyed." }
     format.json { head :no_content }
   end
+end
+
+def show
+
 end
 
 end

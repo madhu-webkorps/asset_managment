@@ -61,3 +61,6 @@ gem 'devise'
 
 #devise for mongodb
  gem 'mongoid', '~> 7.0.5'
+
+ gem "haml-rails"
+gem 'html2haml'

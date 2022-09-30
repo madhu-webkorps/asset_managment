@@ -4,13 +4,15 @@
       <div class = "p-1">
        <h1>Add product form</h1>
       <hr>
+
         <form action="/products " method = "post">
         <%= csrf_meta_tags %>
-        <% @product.each do |product|%>
-          <label for= <%= product.field_name %> > <%=product.field_name%> </label><br>
-          <input type= <%= product.field_type %> id="fname" name= <%= product.field_name %>  placeholder= "Enter <%= product.field_name %> ", class= "p-1"><br><br>
+          <% @product.each do |product|%>
+            <label for= <%= product.field_name %> > <%=product.field_name%> </label><br>
+            <input type= <%= product.field_type %>  name = <%= product.field_name %>  placeholder= "Enter <%= product.field_name %> ", class= "p-1"><br><br>
           <%end%>
           <%= hidden_field_tag :authenticity_token, form_authenticity_token %><br>
+          
           <input type="submit" value="Submit" class= "btn btn-primary">
         </form> 
       </div>

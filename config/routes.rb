@@ -6,5 +6,6 @@ Rails.application.routes.draw do
   resources  :product_fields
   resources  :products
   get "/allproduct" ,to: "products#allproduct"
+  # get "/haml" ,to: "products#first"
   
 end

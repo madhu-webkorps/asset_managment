@@ -18,14 +18,19 @@
 
       
       <thead>
-      <% @products.each do |product| %>
+      <% @products.each do |product|%>
         <tr>
-        <% product.attributes.first do |attributes| %>
-          <% next if attributes[0]  == "_id"%>
+        <% product.attributes.each do |attributes| %>
+        
+          <% next if attributes[0]  == "_id" %>
+           <% next if attributes[0]  == "authenticity_token" %>
           <th><%= attributes[0] %></th>
-           <% end %>
-           <th>Action</th>
-        <tr>
+         
+          
+       <% end %>
+          <th>Action</th>
+        </tr>
+        <%break%>
           <% end %>
       </thead>
       <tbody>
@@ -33,6 +38,7 @@
             <tr>
               <% product.attributes.each do |attributes| %>
                 <% next if attributes[0]  == "_id"%>
+                <% next if attributes[0]  == "authenticity_token" %>
                 <td><%= attributes[1] %></td>
                 
               <% end %>
