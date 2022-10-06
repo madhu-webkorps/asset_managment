@@ -1,4 +1,5 @@
 class ProductsController < ApplicationController 
+  
 @@user = 0
   def new 
     @product = ProductField.all.where(user_id: current_user.id)
@@ -15,8 +16,7 @@ class ProductsController < ApplicationController
 
     hash = Hash.new
     params.each do |key , value |
-      @@user = params[:authenticity_token]
-      if key == "controller"
+      if key == "authenticity_token"
         break
       else
        hash.store(key,value)
@@ -25,41 +25,36 @@ class ProductsController < ApplicationController
     
     product_params = hash
     product_params
-    debugger
-    @product = Product.create(product_params)
-    @product.user_id = current_user.id
+   
+    # @product = Product.new(product_params)
+    id = User.user_with_id (current_user.id)
+    product = Product.product_with_user(id , product_params)
+    puts product
+    
+    
     respond_to do |format|
     
-      if @product.save!
+    #   
         format.html { redirect_to root_url , notice: "product was successfully created." }
-        format.json { render :show, status: :created, location: @product }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @item.errors, status: :unprocessable_entity }
-      end
+    #     
     end
   end
 
   #show all product
   def allproduct
-    debugger
-    @products = Product.where(:authenticity_token == @@user)
-     
-
+    @products = Product.all
   end
 
-def destroy
-  @product = Product.find(params[:id])
-  @product.destroy
+  
+  def destroy
+    @product = Product.find(params[:id])
+    @product.destroy
 
-  respond_to do |format|
-    format.html { redirect_to root_url, notice: "Product was successfully destroyed." }
-    format.json { head :no_content }
+    respond_to do |format|
+      format.html { redirect_to root_url, notice: "Product was successfully destroyed." }
+      format.json { head :no_content }
+    end
   end
-end
 
-def show
-
-end
 
 end

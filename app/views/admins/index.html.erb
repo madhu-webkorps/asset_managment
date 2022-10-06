@@ -1,0 +1,37 @@
+<div class="container mt-5">
+ <div class="row">
+    <div class="col-md-6">
+      <h1>welcome to Admin Dashboard</h1>
+      <hr>
+         <%= link_to "Log Out", destroy_user_session_path , method: :delete, class: "btn btn-outline-danger m-2"%>
+          
+      <p>All users of asset management system are : </p>
+       <table class="table">
+          <thead>
+            <tr>
+              <th> Email </th> 
+              <th>  Product Fields </th>
+            </tr>
+          </thead>
+        <% @users.each do |user|%>
+          <tbody>
+            <tr>
+              <td><%= user.email%></td>
+              <td><%= link_to "Product Fields",user_fields_path(user.id), class: "btn btn-outline-primary", data: {remote: true} %></td>
+              <td><%= link_to "Products", user_products_path(user.id), class: "btn btn-outline-primary", data: {remote: true} %></td>
+            </tr>
+          </tbody>
+        <%end%>
+        </table>
+
+        <div id = "product_fields">
+          <%# <p>Product fileds </p> %>
+        </div>
+
+        <div id = "products">
+          <%# <p>Products </p> %>
+        </div>
+    </div>
+  </div>
+</div>
+

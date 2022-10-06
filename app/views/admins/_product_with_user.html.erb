@@ -1,0 +1,52 @@
+
+
+<table class="table">
+  <thead>
+    <% @products.each do |product|%>
+      <%if product.user_id == @id.to_i%>
+        <tr>
+          <% product.attributes.each do |attributes| %>
+            
+            <% next if attributes[0]  == "_id" %>
+            <% next if attributes[0]  == "authenticity_token" %>
+            
+            <% if attributes[0] == "params" %>
+              <% attributes[1].each do |k , v |%>
+                <th><%= k %></th>
+              <%end%>
+            <%else%>
+              <th><%= attributes[0] %></th>
+            <%end%>
+
+          <% end %>
+        </tr>
+        <%break%>
+      <% end %>
+    <%end%>
+  </thead>
+
+  <tbody>
+    <% @products.each do |product|%>
+      <%if product.user_id == @id.to_i%>
+        <tr>
+          <% product.attributes.each do |attributes| %>
+            <% next if attributes[0]  == "_id"%>
+            <% next if attributes[0]  == "authenticity_token" %>
+            <% if attributes[0] == "params" %>
+              <% attributes[1].each do |k , v |%>
+                <td><%= v %></td>
+              <%end%>
+            <%else%>
+                <td><%= attributes[1] %></td>
+            <%end%> 
+          <% end %>
+        </tr>
+      <%end%>
+    <%end%>
+  </tbody>
+</table>
+
+
+          
+                
+            

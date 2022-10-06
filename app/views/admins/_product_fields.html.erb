@@ -1,0 +1,18 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th> User Name </th> 
+      <th>Field Name </th> 
+      <th>Field Type </th> 
+    </tr>
+  </thead>
+  <% @product_fields.each do |product_field|%>
+  <tbody>
+    <tr>
+      <td><%= product_field.user.name%></td>
+      <td><%= product_field.field_name%></td>
+      <td><%= product_field.field_type%></td>
+       </tr>
+  </tbody>
+<%end%>
+</table>

@@ -18,13 +18,22 @@
 
       
       <thead>
+      
       <% @products.each do |product|%>
+      <% if  product.user_id == current_user.id %>
         <tr>
         <% product.attributes.each do |attributes| %>
         
           <% next if attributes[0]  == "_id" %>
            <% next if attributes[0]  == "authenticity_token" %>
-          <th><%= attributes[0] %></th>
+           
+          <% if attributes[0] == "params" %>
+            <% attributes[1].each do |k , v |%>
+              <th><%= k %></th>
+            <%end%>
+          <%else%>
+            <th><%= attributes[0] %></th>
+          <%end%>
          
           
        <% end %>
@@ -32,14 +41,23 @@
         </tr>
         <%break%>
           <% end %>
+          <%end%>
       </thead>
       <tbody>
           <% @products.each do |product| %>
+          <% if  product.user_id == current_user.id %>
             <tr>
               <% product.attributes.each do |attributes| %>
                 <% next if attributes[0]  == "_id"%>
                 <% next if attributes[0]  == "authenticity_token" %>
-                <td><%= attributes[1] %></td>
+                <% if attributes[0] == "params" %>
+                  <% attributes[1].each do |k , v |%>
+                    <td><%= v %></td>
+                  <%end%>
+                <%else%>
+                    <td><%= attributes[1] %></td>
+                <%end%>
+                
                 
               <% end %>
               <td>
@@ -47,6 +65,7 @@
               </td>
             </tr>
           <% end %>
+          <%end%>
         </tbody>
       </table>
     </div>
