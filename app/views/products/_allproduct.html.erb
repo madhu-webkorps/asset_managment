@@ -37,7 +37,10 @@
          
           
        <% end %>
+        
           <th>Action</th>
+          <%# <th>Created</th>
+          <th>Expired</th> %>
         </tr>
         <%break%>
           <% end %>
@@ -55,7 +58,11 @@
                     <td><%= v %></td>
                   <%end%>
                 <%else%>
-                    <td><%= attributes[1] %></td>
+                    <% if attributes[0] == "created_at" || attributes[0] == "expiredate"  %>
+                      <td><%= attributes[1].strftime('%m/%d/%Y') %></td>
+                    <%else%>
+                      <td><%= attributes[1] %></td>
+                    <%end%>
                 <%end%>
                 
                 
@@ -63,6 +70,8 @@
               <td>
                 <%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' },class: "btn btn-outline-danger" %>
               </td>
+
+              
             </tr>
           <% end %>
           <%end%>
