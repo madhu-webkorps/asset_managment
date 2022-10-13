@@ -1,17 +1,12 @@
 class ProductsController < ApplicationController 
   
-@@user = 0
+
   def new 
     @product = ProductField.all.where(user_id: current_user.id)
     @user_id = ProductField.pluck(:user_id)[0]
-    
-    # @product = Product.new
   end
 
-  # def additem
-  #   @product = ProductField.all.where(user_id: current_user.id)
-  # end
-
+ 
   def create
 
     hash = Hash.new
@@ -26,7 +21,7 @@ class ProductsController < ApplicationController
     product_params = hash
     product_params
    
-    # @product = Product.new(product_params)
+    
     id = User.user_with_id (current_user.id)
     product = Product.product_with_user(id , product_params)
     puts product
